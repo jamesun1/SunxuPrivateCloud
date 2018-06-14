@@ -1,8 +1,9 @@
 package com.physical.mapper;
 
 import com.physical.model.Userinfo;
+import com.physical.util.MyMapper;
 
-public interface UserinfoMapper {
+public interface UserinfoMapper extends MyMapper<UserinfoMapper>{
     int deleteByPrimaryKey(String userid);
 
     int insert(Userinfo record);
