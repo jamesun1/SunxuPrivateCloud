@@ -2,7 +2,11 @@ package com.physical.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Id;
+
+
 public class Userinfo implements Serializable {
+	@Id
     private String userid;
 
     private String user;
