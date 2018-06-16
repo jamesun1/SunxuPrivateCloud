@@ -27,7 +27,7 @@ public class UserServiceImp implements UserService{
 			Userinfo userinfo = userinfoMapper.selectOne(user);
 			if(userinfo != null) {
 				String token = UUID.randomUUID().toString();
-				redisService.set(token, userinfo.getUserid());
+				redisService.set(token, userinfo.getUserid(),(long) (30*60));
 				return ApiResult.success(token);
 			}else {
 				return ApiResult.fail("登录失败");
@@ -39,9 +39,8 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public ApiResult userinfo(String token) throws LogicalException {
+	public ApiResult userinfo(String id) throws LogicalException {
 		try{
-			String id = redisService.get(token).toString();
 			Userinfo user = userinfoMapper.selectByPrimaryKey(id);
 			return ApiResult.success(user);
 		}catch (Exception e) {
