@@ -28,7 +28,7 @@ public class UserServiceImp implements UserService{
 			if(userinfo != null) {
 				redisService.set(userinfo.getUserid(), UUID.randomUUID().toString());
 				System.out.println(redisService.get(userinfo.getUserid()));
-				return ApiResult.success(userinfo);
+				return ApiResult.success(redisService.get(userinfo.getUserid()));
 			}else {
 				return ApiResult.fail("登录失败");
 			}
