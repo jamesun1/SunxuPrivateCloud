@@ -24,7 +24,7 @@ public class UserServiceImp implements UserService{
 	@Override
 	public ApiResult login(Userinfo user) throws LogicalException {
 		try {
-			Userinfo userinfo = userinfoMapper.selectOneByPerson();
+			Userinfo userinfo = userinfoMapper.selectOne(user);
 			if(userinfo != null) {
 				redisService.set(userinfo.getUserid(), UUID.randomUUID().toString());
 				System.out.println(redisService.get(userinfo.getUserid()));
