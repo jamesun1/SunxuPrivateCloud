@@ -26,9 +26,9 @@ public class UserServiceImp implements UserService{
 		try {
 			Userinfo userinfo = userinfoMapper.selectOne(user);
 			if(userinfo != null) {
-				redisService.set(userinfo.getUserid(), UUID.randomUUID().toString());
-				System.out.println(redisService.get(userinfo.getUserid()));
-				return ApiResult.success(redisService.get(userinfo.getUserid()));
+				String token = UUID.randomUUID().toString();
+				redisService.set(token, userinfo.getUserid());
+				return ApiResult.success(token);
 			}else {
 				return ApiResult.fail("登录失败");
 			}
@@ -36,6 +36,17 @@ public class UserServiceImp implements UserService{
 			throw new LogicalException("创建操作异常！");
 		}
 		
+	}
+
+	@Override
+	public ApiResult userinfo(String token) throws LogicalException {
+		try{
+			String id = redisService.get(token).toString();
+			Userinfo user = userinfoMapper.selectByPrimaryKey(id);
+			return ApiResult.success(user);
+		}catch (Exception e) {
+			throw new LogicalException("创建操作异常！");
+		}
 	}
 
 }

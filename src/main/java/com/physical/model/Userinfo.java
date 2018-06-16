@@ -8,6 +8,8 @@ public class Userinfo implements Serializable {
     private String user;
 
     private String password;
+    
+    private String role;
 
     private static final long serialVersionUID = 1L;
 
@@ -17,7 +19,19 @@ public class Userinfo implements Serializable {
         this.password = password;
     }
 
-    public Userinfo() {
+    public String getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+
+	public Userinfo() {
         super();
     }
 

@@ -8,4 +8,6 @@ public interface UserService {
 
 	ApiResult login(Userinfo user) throws LogicalException;
 
+	ApiResult userinfo(String token)throws LogicalException;
+
 }
