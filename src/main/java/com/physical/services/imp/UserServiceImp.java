@@ -1,5 +1,6 @@
 package com.physical.services.imp;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,21 @@ public class UserServiceImp implements UserService {
 		} catch (Exception e) {
 			throw new LogicalException("创建操作异常！");
 		}
+	}
+
+	@Override
+	public ApiResult insgister(Userinfo userinfo) throws LogicalException {
+		Userinfo user = new Userinfo();
+		user.setUser(userinfo.getUser());
+		List<Userinfo> userlist = userinfoMapper.select(user);
+		if(userlist.size() == 0){
+			userinfo.setUserid(UUID.randomUUID().toString());
+			userinfoMapper.insert(userinfo);
+			return ApiResult.success();
+		}else{
+			return ApiResult.fail("此账号已经被人抢先注册");
+		}
+		
 	}
 
 }

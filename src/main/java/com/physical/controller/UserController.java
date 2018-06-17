@@ -60,4 +60,18 @@ public class UserController {
 			return ApiResult.fail("操作失败！");
 		}
 	}
+	
+	@RequestMapping("insgister")
+	public ApiResult insgister(@RequestBody Userinfo userinfo,HttpServletRequest request) {
+		try {
+			if(userinfo == null){
+				throw new LogicalException("请输入账号密码");
+			}
+			return userService.insgister(userinfo);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
 }

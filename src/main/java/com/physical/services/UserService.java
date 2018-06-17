@@ -12,4 +12,6 @@ public interface UserService {
 
 	ApiResult logout(String token)throws LogicalException;
 
+	ApiResult insgister(Userinfo userinfo)throws LogicalException;
+
 }
