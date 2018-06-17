@@ -14,8 +14,8 @@ import com.physical.util.JedisUtils;
 import com.physical.util.LogicalException;
 
 @Service
-public class UserServiceImp implements UserService{
-	
+public class UserServiceImp implements UserService {
+
 	@Autowired
 	private UserinfoMapper userinfoMapper;
 	@Autowired
@@ -25,25 +25,37 @@ public class UserServiceImp implements UserService{
 	public ApiResult login(Userinfo user) throws LogicalException {
 		try {
 			Userinfo userinfo = userinfoMapper.selectOne(user);
-			if(userinfo != null) {
+			if (userinfo != null) {
 				String token = UUID.randomUUID().toString();
-				redisService.set(token, userinfo.getUserid(),(long) (30*60));
+				redisService.set(token, userinfo.getUserid(), (long) (30 * 60));
 				return ApiResult.success(token);
-			}else {
+			} else {
 				return ApiResult.fail("登录失败");
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new LogicalException("创建操作异常！");
 		}
-		
+
 	}
 
 	@Override
 	public ApiResult userinfo(String id) throws LogicalException {
-		try{
+		try {
 			Userinfo user = userinfoMapper.selectByPrimaryKey(id);
 			return ApiResult.success(user);
-		}catch (Exception e) {
+		} catch (Exception e) {
+			throw new LogicalException("创建操作异常！");
+		}
+	}
+
+	@Override
+	public ApiResult logout(String token) throws LogicalException {
+		try {
+			if (redisService.exists(token)) {
+				redisService.remove(token);
+			}
+			return ApiResult.success();
+		} catch (Exception e) {
 			throw new LogicalException("创建操作异常！");
 		}
 	}

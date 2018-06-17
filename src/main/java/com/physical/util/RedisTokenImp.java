@@ -25,6 +25,12 @@ public class RedisTokenImp implements RedisTokenService{
 			return null;
 		}
 	}
+
+	@Override
+	public String getToken(HttpServletRequest request) {
+		String token = request.getHeader(X_TOKEN);
+		return token;
+	}
 	
 	
 }

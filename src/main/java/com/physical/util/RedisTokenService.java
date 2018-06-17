@@ -6,4 +6,6 @@ public interface RedisTokenService {
 
 	String getUserIdByToken(HttpServletRequest request);
 
+	String getToken(HttpServletRequest request);
+
 }

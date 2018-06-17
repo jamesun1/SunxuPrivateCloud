@@ -48,4 +48,16 @@ public class UserController {
 			return ApiResult.fail("操作失败！");
 		}
 	}
+	
+	@RequestMapping("logout")
+	public ApiResult logout(HttpServletRequest request) {
+		try {
+			String token = redisTokenService.getToken(request);
+			return userService.logout(token);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
 }
