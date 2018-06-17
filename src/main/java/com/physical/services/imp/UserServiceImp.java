@@ -68,6 +68,7 @@ public class UserServiceImp implements UserService {
 		List<Userinfo> userlist = userinfoMapper.select(user);
 		if(userlist.size() == 0){
 			userinfo.setUserid(UUID.randomUUID().toString());
+			userinfo.setRole("1");
 			userinfoMapper.insert(userinfo);
 			return ApiResult.success();
 		}else{
