@@ -8,4 +8,6 @@ public interface TableService {
 
 	ApiResult selectAll(Tableinfo table)throws LogicalException;
 
+	ApiResult insert(Tableinfo table)throws LogicalException;
+
 }

@@ -4,4 +4,7 @@
 	<select id="selectOneByPerson" parameterType="com.physical.model.Userinfo" resultType="com.physical.model.Userinfo">
 		select * from userinfo;
 	</select>
+	<select id="selectAllUser" resultType="java.lang.String">
+		select userid from userinfo;
+	</select>
 </mapper>

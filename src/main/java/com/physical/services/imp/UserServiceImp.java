@@ -67,10 +67,12 @@ public class UserServiceImp implements UserService {
 		try {
 			if (redisService.exists(token)) {
 				redisService.remove(token);
+				String id = (String) redisService.get(token);
+				redisService.remove(id);
 			}
 			return ApiResult.success();
 		} catch (Exception e) {
-			throw new LogicalException("创建操作异常！");
+			throw new LogicalException("退出清除redis异常！");
 		}
 	}
 

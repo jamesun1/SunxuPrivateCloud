@@ -1,6 +1,7 @@
 package com.physical.services.imp;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,18 @@ public class TableServiceImp implements TableService{
 		}catch (Exception e) {
 			throw new LogicalException("这个人没有权限");
 		}
+	}
+
+	@Override
+	public ApiResult insert(Tableinfo table) throws LogicalException {
+		try{
+			table.setTableid(UUID.randomUUID().toString());
+			tableinfoMapper.insert(table);
+			return ApiResult.success();
+		}catch(Exception e){
+			throw new LogicalException("新建失败");
+		}
+		
 	}
 
 }
