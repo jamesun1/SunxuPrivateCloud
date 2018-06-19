@@ -46,7 +46,7 @@ public class RedisTokenImp implements RedisTokenService{
 			
 			List<String> strList = new ArrayList<String>();
 			
-			List<Object> setList = new ArrayList<Object>(set);  
+			List<Object> setList =(List<Object>) set.iterator().next();  
 			for(Object object : setList) {
 				strList.add((String)object);
 			}

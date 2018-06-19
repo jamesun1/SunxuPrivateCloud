@@ -33,7 +33,7 @@ public class UserServiceImp implements UserService {
 				redisService.set(token, userinfo.getUserid(), (long) (30 * 60));
 				
 				List<String> list = new ArrayList<String>();
-				if(userinfo.getRole().equals("1")) {
+				if(userinfo.getRole().equals("0")) {
 					list = userinfoMapper.selectAllUser();
 				}else {
 					list.add(userinfo.getUserid());
