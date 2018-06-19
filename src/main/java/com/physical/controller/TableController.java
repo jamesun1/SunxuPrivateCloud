@@ -25,7 +25,7 @@ public class TableController {
 	public ApiResult selectAll(HttpServletRequest request) {
 		try {
 			Tableinfo table = new Tableinfo();
-			table.setOwner(redisTokenService.getUserIdByToken(request));
+			table.setOwnerList(redisTokenService.getOwnerList(request));
 			
 			return ApiResult.success(tableService.selectAll(table));
 		}catch (LogicalException e) {

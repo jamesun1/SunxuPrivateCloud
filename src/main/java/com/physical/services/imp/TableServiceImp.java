@@ -19,8 +19,12 @@ public class TableServiceImp implements TableService{
 
 	@Override
 	public ApiResult selectAll(Tableinfo table) throws LogicalException {
-		List<Tableinfo> tablelist = tableinfoMapper.selectAllByRole(table);
-		return null;
+		try {
+			List<Tableinfo> tablelist = tableinfoMapper.selectAllByRole(table);
+			return ApiResult.success(tablelist);
+		}catch (Exception e) {
+			throw new LogicalException("这个人没有权限");
+		}
 	}
 
 }
