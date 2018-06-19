@@ -1,5 +1,7 @@
 package com.physical.util;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 public interface RedisTokenService {
@@ -8,4 +10,5 @@ public interface RedisTokenService {
 
 	String getToken(HttpServletRequest request);
 
+	List<String> getOwnerList(HttpServletRequest request);
 }

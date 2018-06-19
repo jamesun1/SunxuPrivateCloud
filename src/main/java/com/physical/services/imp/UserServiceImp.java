@@ -40,7 +40,7 @@ public class UserServiceImp implements UserService {
 				}
 				
 				//userid >>>> role
-				redisService.set(userinfo.getUserid(), list);
+				redisService.add(userinfo.getUserid(), list);
 				
 				return ApiResult.success(token);
 			} else {

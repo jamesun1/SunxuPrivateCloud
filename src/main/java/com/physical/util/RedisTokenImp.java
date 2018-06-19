@@ -1,5 +1,10 @@
 package com.physical.util;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +35,26 @@ public class RedisTokenImp implements RedisTokenService{
 	public String getToken(HttpServletRequest request) {
 		String token = request.getHeader(X_TOKEN);
 		return token;
+	}
+
+	@Override
+	public List<String> getOwnerList(HttpServletRequest request) {
+		String token = request.getHeader(X_TOKEN);
+		if(!StringUtils.isNullOrEmpty(token)){
+			String userid = redisService.get(token).toString();
+			Set<Object> set = redisService.setMembers(userid);
+			
+			List<String> strList = new ArrayList<String>();
+			
+			List<Object> setList = new ArrayList<Object>(set);  
+			for(Object object : setList) {
+				strList.add((String)object);
+			}
+			
+			return strList;
+		}else{
+			return null;
+		}
 	}
 	
 	

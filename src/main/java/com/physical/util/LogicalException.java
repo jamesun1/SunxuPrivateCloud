@@ -3,7 +3,7 @@ package com.physical.util;
 /**
  * 消息异常类
  * 
- * @author DONG
+ * @author SUN
  *
  */
 public class LogicalException extends Exception {
