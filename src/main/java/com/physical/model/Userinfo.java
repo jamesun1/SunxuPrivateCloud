@@ -14,6 +14,8 @@ public class Userinfo implements Serializable {
     private String password;
     
     private String role;
+    
+    private String usermobile;
 
     private static final long serialVersionUID = 1L;
 
@@ -22,8 +24,18 @@ public class Userinfo implements Serializable {
         this.user = user;
         this.password = password;
     }
+    
+    public String getUsermobile() {
+		return usermobile;
+	}
 
-    public String getRole() {
+
+	public void setUsermobile(String usermobile) {
+		this.usermobile = usermobile;
+	}
+
+
+	public String getRole() {
 		return role;
 	}
 

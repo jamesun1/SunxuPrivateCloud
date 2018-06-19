@@ -1,5 +1,6 @@
 package com.physical.services.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,10 +29,22 @@ public class UserServiceImp implements UserService {
 			Userinfo userinfo = userinfoMapper.selectOne(user);
 			if (userinfo != null) {
 				String token = UUID.randomUUID().toString();
+				//token >>>> userid
 				redisService.set(token, userinfo.getUserid(), (long) (30 * 60));
+				
+				List<String> list = new ArrayList<String>();
+				if(userinfo.getRole().equals("1")) {
+					list = userinfoMapper.selectAllUser();
+				}else {
+					list.add(userinfo.getUserid());
+				}
+				
+				//userid >>>> role
+				redisService.set(userinfo.getUserid(), list);
+				
 				return ApiResult.success(token);
 			} else {
-				return ApiResult.fail("登录失败");
+				return ApiResult.fail("登录失败,请检查用户名密码");
 			}
 		} catch (Exception e) {
 			throw new LogicalException("创建操作异常！");
