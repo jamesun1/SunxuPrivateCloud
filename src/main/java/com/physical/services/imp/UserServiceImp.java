@@ -30,7 +30,7 @@ public class UserServiceImp implements UserService {
 			if (userinfo != null) {
 				String token = UUID.randomUUID().toString();
 				//token >>>> userid
-				redisService.set(token, userinfo.getUserid(), (long) (30 * 60));
+				redisService.set(token, userinfo.getUserid());
 				
 				List<String> list = new ArrayList<String>();
 				if(userinfo.getRole().equals("0")) {
