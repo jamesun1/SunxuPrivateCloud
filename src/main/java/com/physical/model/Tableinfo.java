@@ -3,7 +3,7 @@ package com.physical.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Tableinfo extends OwnListInfo implements Serializable {
+public class Tableinfo extends OwnerListInfo implements Serializable {
     private String tableid;
 
     private String name;

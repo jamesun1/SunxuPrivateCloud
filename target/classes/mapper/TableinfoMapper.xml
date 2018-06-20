@@ -13,5 +13,6 @@
 				#{item}
 			</foreach>
 		</if>
+		limit #{startNums},#{pageSize}
 	</select>
 </mapper>
