@@ -28,7 +28,7 @@ public class TableController {
 			Tableinfo table = new Tableinfo();
 			table.setOwnerList(redisTokenService.getOwnerList(request));
 			
-			return ApiResult.success(tableService.selectAll(table));
+			return tableService.selectAll(table);
 		}catch (LogicalException e) {
 			return ApiResult.fail(e.getMessage());
 		} catch (Exception e) {
