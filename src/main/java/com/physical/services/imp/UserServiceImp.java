@@ -66,9 +66,11 @@ public class UserServiceImp implements UserService {
 	public ApiResult logout(String token) throws LogicalException {
 		try {
 			if (redisService.exists(token)) {
-				redisService.remove(token);
 				String id = (String) redisService.get(token);
-				redisService.remove(id);
+				redisService.remove(token);
+				if(redisService.exists(id)) {
+					redisService.remove(id);
+				}
 			}
 			return ApiResult.success();
 		} catch (Exception e) {
