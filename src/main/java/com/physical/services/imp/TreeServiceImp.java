@@ -21,10 +21,7 @@ public class TreeServiceImp implements TreeService{
 	@Override
 	public ApiResult selectTreeInfo() throws LogicalException {
 		try {
-			Treeinfo tree = new Treeinfo();
-			tree.setParentid(null);
-			tree.setStatus("0");
-			List<Treeinfo> treeInfo = treeinfoMapper.select(tree);
+			List<Treeinfo> treeInfo = treeinfoMapper.selectTreeInfo();
 			return ApiResult.success(treeInfo);
 		}catch (Exception e) {
 			throw new LogicalException("操作失败");
