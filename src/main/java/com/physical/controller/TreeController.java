@@ -39,4 +39,15 @@ public class TreeController {
 			return ApiResult.fail("操作失败！");
 		}
 	}
+	
+	@RequestMapping(value = "selectInfoByParentid", method = { RequestMethod.POST })
+	public ApiResult selectInfoByParentid(@RequestBody Treeinfo tree) {
+		try {
+			return treeService.selectInfoByParentid(tree);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
 }

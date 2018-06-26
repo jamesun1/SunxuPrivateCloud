@@ -10,4 +10,7 @@ public interface TreeService {
 
 	ApiResult insertTreeInfo(Treeinfo tree)throws LogicalException;
 
+	ApiResult selectInfoByParentid(Treeinfo tree)throws LogicalException;
+
+
 }
