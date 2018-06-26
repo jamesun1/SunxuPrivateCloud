@@ -43,6 +43,7 @@ public class TreeServiceImp implements TreeService{
 	@Override
 	public ApiResult selectInfoByParentid(Treeinfo tree) throws LogicalException {
 		try {
+			tree.setStatus("0");
 			List<Treeinfo> treeinfoList = treeinfoMapper.select(tree);
 			return ApiResult.success(treeinfoList);	
 		}catch (Exception e) {
