@@ -50,4 +50,16 @@ public class TreeController {
 			return ApiResult.fail("操作失败！");
 		}
 	}
+	
+	@RequestMapping(value = "deleteTreeInfo", method = { RequestMethod.POST })
+	public ApiResult deleteTreeInfo(@RequestBody Treeinfo tree) {
+		try {
+			return treeService.deleteTreeInfo(tree);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
+	
 }

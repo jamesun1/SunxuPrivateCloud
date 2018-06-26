@@ -12,5 +12,7 @@ public interface TreeService {
 
 	ApiResult selectInfoByParentid(Treeinfo tree)throws LogicalException;
 
+	ApiResult deleteTreeInfo(Treeinfo tree)throws LogicalException;
+
 
 }

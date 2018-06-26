@@ -49,5 +49,16 @@ public class TreeServiceImp implements TreeService{
 			throw new LogicalException("操作失败");
 		}
 	}
+
+	@Override
+	public ApiResult deleteTreeInfo(Treeinfo tree) throws LogicalException {
+		try {
+			tree.setStatus("1");
+			treeinfoMapper.updateByPrimaryKeySelective(tree);
+			return ApiResult.success();	
+		}catch (Exception e) {
+			throw new LogicalException("操作失败");
+		}
+	}
 	
 }
