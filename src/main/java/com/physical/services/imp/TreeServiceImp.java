@@ -1,6 +1,7 @@
 package com.physical.services.imp;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,7 @@ public class TreeServiceImp implements TreeService{
 	@Override
 	public ApiResult insertTreeInfo(Treeinfo tree) throws LogicalException {
 		try {
+			tree.setTreeid(UUID.randomUUID().toString());
 			tree.setStatus("0");
 			treeinfoMapper.insert(tree);
 			return ApiResult.success();	
