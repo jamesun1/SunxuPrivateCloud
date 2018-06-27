@@ -34,5 +34,6 @@
 		WHERE
 		parentid =#{parentid}
 		AND STATUS = '0'
+		
 	</select>
 </mapper>
