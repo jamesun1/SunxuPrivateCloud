@@ -3,6 +3,7 @@ package com.physical.model;
 import java.io.Serializable;
 
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 public class Treeinfo implements Serializable {
 	@Id
@@ -13,8 +14,19 @@ public class Treeinfo implements Serializable {
     private String parentid;
 
     private String status;
+    
+    @Transient
+    private Boolean hasChildren;
 
-    private static final long serialVersionUID = 1L;
+    public Boolean getHasChildren() {
+		return hasChildren;
+	}
+
+	public void setHasChildren(Boolean hasChildren) {
+		this.hasChildren = hasChildren;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Treeinfo(String treeid, String name, String parentid, String status) {
         this.treeid = treeid;

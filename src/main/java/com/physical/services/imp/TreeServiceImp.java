@@ -44,7 +44,7 @@ public class TreeServiceImp implements TreeService{
 	public ApiResult selectInfoByParentid(Treeinfo tree) throws LogicalException {
 		try {
 			tree.setStatus("0");
-			List<Treeinfo> treeinfoList = treeinfoMapper.select(tree);
+			List<Treeinfo> treeinfoList = treeinfoMapper.selectInfoByParentid(tree);
 			return ApiResult.success(treeinfoList);	
 		}catch (Exception e) {
 			throw new LogicalException("操作失败");

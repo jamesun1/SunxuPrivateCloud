@@ -8,5 +8,7 @@ import com.physical.util.MyMapper;
 public interface TreeinfoMapper extends MyMapper<Treeinfo>{
 
 	List<Treeinfo> selectTreeInfo();
+
+	List<Treeinfo> selectInfoByParentid(Treeinfo tree);
 	
 }
