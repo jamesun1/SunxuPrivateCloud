@@ -31,7 +31,7 @@
 		FROM
 		treeinfo tree
 		WHERE
-		parentid =#{parentid}
+		parentid =#{parentid
 		AND STATUS = '0'
 	</select>
 </mapper>
