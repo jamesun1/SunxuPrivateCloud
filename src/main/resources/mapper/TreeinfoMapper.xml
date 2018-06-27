@@ -6,7 +6,7 @@
 		tree.*,
 		CASE
 		WHEN
-		EXISTS ( SELECT * FROM treeinfo WHERE parentid = tree.treeid and 'status' ='0') THEN
+		EXISTS ( SELECT * FROM treeinfo WHERE parentid = tree.treeid and status ='0') THEN
 		TRUE
 		ELSE
 		FALSE
@@ -23,7 +23,8 @@
 		SELECT
 		tree.*,
 		CASE
-		WHEN EXISTS ( SELECT * FROM treeinfo WHERE parentid = tree.treeid and 'status'='0') THEN
+		WHEN 
+		EXISTS ( SELECT * FROM treeinfo WHERE parentid = tree.treeid and status ='0') THEN
 		TRUE
 		ELSE
 		FALSE
