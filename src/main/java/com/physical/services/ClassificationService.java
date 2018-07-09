@@ -12,4 +12,6 @@ public interface ClassificationService {
 
 	ApiResult insert(Classification classification)throws LogicalException;
 
+	ApiResult selectById(Classification classification)throws LogicalException;
+
 }

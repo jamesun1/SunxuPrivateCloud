@@ -70,4 +70,18 @@ public class ClassificationServiceImp implements ClassificationService{
 			throw new LogicalException(e.getMessage());
 		}
 	}
+
+	@Override
+	public ApiResult selectById(Classification classification) throws LogicalException {
+		try {
+			Dictionary dictionary = new Dictionary();
+			dictionary.setClassificationid(classification.getClassificationid());
+			dictionary.setStatus("0");
+			
+			return ApiResult.success(dictionaryMapper.select(dictionary));
+		}catch (Exception e) {
+			throw new LogicalException(e.getMessage());
+		}
+		
+	}
 }

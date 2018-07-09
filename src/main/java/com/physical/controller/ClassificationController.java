@@ -55,4 +55,15 @@ public class ClassificationController {
 			return ApiResult.fail("操作失败！");
 		}
 	}
+	
+	@RequestMapping("selectById")
+	public ApiResult selectById(HttpServletRequest request,@RequestBody Classification classification) {
+		try {
+			return classificationService.selectById(classification);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
 }
