@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.physical.model.Classification;
@@ -26,6 +27,17 @@ public class ClassificationController {
 	public ApiResult selectAll(HttpServletRequest request) {
 		try {
 			return classificationService.selectAll();
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
+	
+	@RequestMapping("deleteInfo")
+	public ApiResult deleteInfo(HttpServletRequest request,@RequestBody Classification classification) {
+		try {
+			return classificationService.deleteInfo(classification);
 		}catch (LogicalException e) {
 			return ApiResult.fail(e.getMessage());
 		} catch (Exception e) {
