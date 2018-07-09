@@ -96,4 +96,14 @@ public class ClassificationServiceImp implements ClassificationService{
 			throw new LogicalException(e.getMessage());
 		}
 	}
+
+	@Override
+	public ApiResult deleteDictionary(Dictionary dictionary) throws LogicalException {
+		try {
+			dictionaryMapper.delete(dictionary);
+			return ApiResult.success();
+		}catch (Exception e) {
+			throw new LogicalException(e.getMessage());
+		}
+	}
 }
