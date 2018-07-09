@@ -10,4 +10,6 @@ public interface ClassificationService {
 
 	ApiResult deleteInfo(Classification classification)throws LogicalException;
 
+	ApiResult insert(Classification classification)throws LogicalException;
+
 }

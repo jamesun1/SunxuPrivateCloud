@@ -1,6 +1,7 @@
 package com.physical.services.imp;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,4 +52,22 @@ public class ClassificationServiceImp implements ClassificationService{
 		}
 	}
 
+	@Override
+	public ApiResult insert(Classification classification) throws LogicalException {
+		try {
+			Classification ification = new Classification();
+			ification.setCode(classification.getCode());
+			List<Classification> ificationList = classificationMapper.select(ification);
+			if(ificationList.size() == 0) {
+				classification.setClassificationid(UUID.randomUUID().toString());
+				classification.setStatus("0");
+				classificationMapper.insert(classification);
+			}else {
+				throw new LogicalException("此code编码已被使用，请更换code");
+			}
+			return ApiResult.success();
+		}catch (Exception e) {
+			throw new LogicalException(e.getMessage());
+		}
+	}
 }

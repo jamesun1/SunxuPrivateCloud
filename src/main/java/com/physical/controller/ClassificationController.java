@@ -44,4 +44,15 @@ public class ClassificationController {
 			return ApiResult.fail("操作失败！");
 		}
 	}
+	
+	@RequestMapping("insert")
+	public ApiResult insert(HttpServletRequest request,@RequestBody Classification classification) {
+		try {
+			return classificationService.insert(classification);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
 }
