@@ -84,4 +84,16 @@ public class ClassificationServiceImp implements ClassificationService{
 		}
 		
 	}
+
+	@Override
+	public ApiResult insertDictionary(Dictionary dictionary) throws LogicalException {
+		try {
+			dictionary.setDictionaryid(UUID.randomUUID().toString());
+			dictionary.setStatus("0");
+			dictionaryMapper.insert(dictionary);
+			return ApiResult.success();
+		}catch (Exception e) {
+			throw new LogicalException(e.getMessage());
+		}
+	}
 }

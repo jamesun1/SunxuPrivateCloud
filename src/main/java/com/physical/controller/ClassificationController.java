@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.physical.model.Classification;
+import com.physical.model.Dictionary;
 import com.physical.model.PageInfo;
 import com.physical.model.Tableinfo;
 import com.physical.services.ClassificationService;
@@ -60,6 +61,17 @@ public class ClassificationController {
 	public ApiResult selectById(HttpServletRequest request,@RequestBody Classification classification) {
 		try {
 			return classificationService.selectById(classification);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
+	
+	@RequestMapping("insertDictionary")
+	public ApiResult insertDictionary(HttpServletRequest request,@RequestBody Dictionary dictionary) {
+		try {
+			return classificationService.insertDictionary(dictionary);
 		}catch (LogicalException e) {
 			return ApiResult.fail(e.getMessage());
 		} catch (Exception e) {
