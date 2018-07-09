@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Estate.services.impl.CustomerServiceImpl;
 import com.physical.mapper.TreeinfoMapper;
 import com.physical.model.Treeinfo;
 import com.physical.services.TreeService;
