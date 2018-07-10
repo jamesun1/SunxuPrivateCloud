@@ -111,7 +111,10 @@ public class ClassificationServiceImp implements ClassificationService {
 	public ApiResult selectByCode(Classification classification) throws LogicalException {
 		try {
 			classification.setStatus("0");
-			return ApiResult.success(classificationMapper.select(classification));
+			Classification ification = classificationMapper.selectOne(classification);
+			Dictionary dictionary = new Dictionary();
+			dictionary.setClassificationid(ification.getClassificationid());
+			return ApiResult.success(dictionaryMapper.select(dictionary));
 		} catch (Exception e) {
 			throw new LogicalException(e.getMessage());
 		}
