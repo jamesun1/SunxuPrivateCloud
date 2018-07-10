@@ -15,21 +15,21 @@ import com.physical.util.ApiResult;
 import com.physical.util.LogicalException;
 
 @Service
-public class ClassificationServiceImp implements ClassificationService{
+public class ClassificationServiceImp implements ClassificationService {
 
 	@Autowired
 	private ClassificationMapper classificationMapper;
-	
+
 	@Autowired
 	private DictionaryMapper dictionaryMapper;
-	
+
 	@Override
 	public ApiResult selectAll() throws LogicalException {
 		try {
 			Classification ification = new Classification();
 			ification.setStatus("0");
 			return ApiResult.success(classificationMapper.select(ification));
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new LogicalException("这个人没有权限");
 		}
 	}
@@ -40,14 +40,14 @@ public class ClassificationServiceImp implements ClassificationService{
 			Classification code = new Classification();
 			code.setCode(classification.getCode());
 			List<Classification> classificationList = classificationMapper.select(code);
-			for(Classification item : classificationList) {
+			for (Classification item : classificationList) {
 				Dictionary dictory = new Dictionary();
 				dictory.setClassificationid(item.getClassificationid());
 				dictionaryMapper.delete(dictory);
 			}
 			classificationMapper.deleteByPrimaryKey(classification);
 			return ApiResult.success();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new LogicalException("这个人没有权限");
 		}
 	}
@@ -58,15 +58,15 @@ public class ClassificationServiceImp implements ClassificationService{
 			Classification ification = new Classification();
 			ification.setCode(classification.getCode());
 			List<Classification> ificationList = classificationMapper.select(ification);
-			if(ificationList.size() == 0) {
+			if (ificationList.size() == 0) {
 				classification.setClassificationid(UUID.randomUUID().toString());
 				classification.setStatus("0");
 				classificationMapper.insert(classification);
-			}else {
+			} else {
 				throw new LogicalException("此code编码已被使用，请更换code");
 			}
 			return ApiResult.success();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new LogicalException(e.getMessage());
 		}
 	}
@@ -77,12 +77,12 @@ public class ClassificationServiceImp implements ClassificationService{
 			Dictionary dictionary = new Dictionary();
 			dictionary.setClassificationid(classification.getClassificationid());
 			dictionary.setStatus("0");
-			
+
 			return ApiResult.success(dictionaryMapper.select(dictionary));
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new LogicalException(e.getMessage());
 		}
-		
+
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class ClassificationServiceImp implements ClassificationService{
 			dictionary.setStatus("0");
 			dictionaryMapper.insert(dictionary);
 			return ApiResult.success();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new LogicalException(e.getMessage());
 		}
 	}
@@ -102,8 +102,19 @@ public class ClassificationServiceImp implements ClassificationService{
 		try {
 			dictionaryMapper.delete(dictionary);
 			return ApiResult.success();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new LogicalException(e.getMessage());
 		}
+	}
+
+	@Override
+	public ApiResult selectByCode(Classification classification) throws LogicalException {
+		try {
+			classification.setStatus("0");
+			return ApiResult.success(classificationMapper.select(classification));
+		} catch (Exception e) {
+			throw new LogicalException(e.getMessage());
+		}
+
 	}
 }

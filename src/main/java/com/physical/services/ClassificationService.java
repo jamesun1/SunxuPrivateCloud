@@ -19,4 +19,6 @@ public interface ClassificationService {
 
 	ApiResult deleteDictionary(Dictionary dictionary)throws LogicalException;
 
+	ApiResult selectByCode(Classification classification)throws LogicalException;
+
 }

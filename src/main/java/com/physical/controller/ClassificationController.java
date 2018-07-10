@@ -46,6 +46,17 @@ public class ClassificationController {
 		}
 	}
 	
+	@RequestMapping("selectByCode")
+	public ApiResult selectByCode(HttpServletRequest request,@RequestBody Classification classification) {
+		try {
+			return classificationService.selectByCode(classification);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
+	
 	@RequestMapping("insert")
 	public ApiResult insert(HttpServletRequest request,@RequestBody Classification classification) {
 		try {
