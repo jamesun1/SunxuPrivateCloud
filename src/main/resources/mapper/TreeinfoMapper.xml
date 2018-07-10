@@ -33,6 +33,6 @@
 		treeinfo tree
 		WHERE
 		parentid =#{parentid}
-		AND STATUS = '0'
+		and STATUS = '0'
 	</select>
 </mapper>
