@@ -34,7 +34,7 @@ public class JedisUtils {
 		JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
 		// 设置最大10个连接
 		jedisPoolConfig.setMaxTotal(10);
-		pool = new JedisPool(jedisPoolConfig, host, Integer.valueOf(port), Integer.valueOf(timeout), password);
+		pool = new JedisPool(jedisPoolConfig, host, Integer.valueOf(port.toString()), Integer.valueOf(timeout), password);
 		Jedis jedis = pool.getResource();
 		return jedis;
 	}
