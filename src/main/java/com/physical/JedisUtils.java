@@ -57,6 +57,16 @@ public class JedisUtils {
 		return o;
 	}
 	
+	public static void remove(String key) {
+		Jedis jedis = openJedis();
+		jedis.del(key);
+	}
+	
+	public static void remove(byte[] key) {
+		Jedis jedis = openJedis();
+		jedis.del(key);
+	}
+	
 	public static void main(String[] args) {
 		RedisTest test = new RedisTest();
 		test.setName("孙旭");
@@ -70,5 +80,7 @@ public class JedisUtils {
 		
 		JSONObject json = (JSONObject) JSONObject.toJSON(aa);
 		System.out.println(json.toJSONString());
+		
+		remove("sunxu".getBytes());
 	}
 }
