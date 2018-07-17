@@ -26,11 +26,20 @@ public class JedisUtils {
 		return jedis;
 	}
 	
+	/**
+	 * 关闭连接
+	 * @param jedis
+	 */
 	public static void closeJedis(Jedis jedis) {
 		jedis.close();
 		pool.close();
 	}
 	
+	/**
+	 * 传入对象最为键值对
+	 * @param key
+	 * @param value
+	 */
 	public static void append(byte[] key,Object value) {
 		Jedis jedis = openJedis();
 		byte[] b = SerializeUtil.serialize(value);
@@ -38,18 +47,33 @@ public class JedisUtils {
 		closeJedis(jedis);
 	}
 	
+	/**
+	 * 传入字符串作为键值对
+	 * @param key
+	 * @param value
+	 */
 	public static void append(String key,String value) {
 		Jedis jedis = openJedis();
 		jedis.append(key, value);
 		closeJedis(jedis);
 	}
 	
+	/**
+	 * 根据字符串key获取值
+	 * @param key
+	 * @return
+	 */
 	public static String getValue(String key) {
 		Jedis jedis = openJedis();
 		String value = jedis.get(key);
 		return value;
 	}
 	
+	/**
+	 * 根据对象key查找
+	 * @param key
+	 * @return
+	 */
 	public static Object getValue(byte[] key) {
 		Jedis jedis = openJedis();
 		byte[] b = jedis.get(key);
@@ -57,11 +81,19 @@ public class JedisUtils {
 		return o;
 	}
 	
+	/**
+	 * 删除
+	 * @param key
+	 */
 	public static void remove(String key) {
 		Jedis jedis = openJedis();
 		jedis.del(key);
 	}
 	
+	/**
+	 * 删除
+	 * @param key
+	 */
 	public static void remove(byte[] key) {
 		Jedis jedis = openJedis();
 		jedis.del(key);
@@ -69,7 +101,7 @@ public class JedisUtils {
 	
 	public static void main(String[] args) {
 		RedisTest test = new RedisTest();
-		test.setName("孙旭");
+		test.setName("小明");
 		test.setAge("22");
 		test.setHeight("177");
 		test.setWeight("74.7");
