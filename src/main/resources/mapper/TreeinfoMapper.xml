@@ -24,20 +24,15 @@
 		SELECT
 		tree.*,
 		CASE
-		WHEN
-		EXISTS ( SELECT * FROM treeinfo WHERE parentid = tree.treeid and status
-		='0') THEN
-		TRUE
-		ELSE
-		FALSE
+		WHEN EXISTS ( SELECT * FROM treeinfo WHERE parentid = tree.treeid AND
+		STATUS = '0' ) THEN
+		TRUE ELSE FALSE
 		END hasChildren
 		FROM
 		treeinfo tree
 		WHERE
-		1=1
-		and
-		parentid =#{parentid}
-		and
-		status = '0'
+		1 = 1
+		AND parentid = #{parentid}
+		AND STATUS = '0'
 	</select>
 </mapper>
