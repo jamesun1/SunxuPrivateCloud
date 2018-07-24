@@ -58,7 +58,7 @@ public class UploadServiceImp implements UploadMapper {
 			response.addHeader("Content-Length", "" + ff.length());
 			response.setHeader("Access-Control-Allow-Origin", "*");
 			OutputStream os = new BufferedOutputStream(response.getOutputStream());
-			response.setContentType("application/octet-stream");
+			response.setContentType("image/jpg");
 			os.write(bt);// 输出文件
             os.flush();
             os.close();
