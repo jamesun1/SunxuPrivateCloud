@@ -41,31 +41,14 @@ public class UploadServiceImp implements UploadMapper {
 				fileNameKey = itr.next(); // 原来的文件名的key
 				MultipartFile file2 = itrs.get(fileNameKey);
 				fileName = file2.getOriginalFilename(); // 原文件名
-				fileName = fileName.substring(0, fileName.lastIndexOf('.')); // 原文件名去掉后缀
 			}
 			MultipartFile file = ((MultipartHttpServletRequest) request).getFile(fileNameKey);
 			InputStream stream = file.getInputStream();
-			File ff = new File("D:/aa.jpg");
+			File ff = new File("/www/images/"+fileName);
 			Thumbnails.of(stream).scale(1f).outputQuality(0.5f).toFile(ff);
-
-			InputStream fis = new FileInputStream(ff);
-			byte[] bt = new byte[fis.available()];
-			fis.read(bt);
-			fis.close();
 			
-			response.reset();
-			response.addHeader("Content-Disposition", "attachment;filename=" + new String("文件".getBytes("utf-8"),"iso8859-1"));
-			response.addHeader("Content-Length", "" + ff.length());
-			response.setHeader("Access-Control-Allow-Origin", "*");
-			OutputStream os = new BufferedOutputStream(response.getOutputStream());
-			response.setContentType("image/jpg");
-			os.write(bt);// 输出文件
-            os.flush();
-            os.close();
-            
-//			FileOutputStream outStream = new FileOutputStream(ff); //文件输出流将数据写入文件
-//            outStream.write(bt);
-//            outStream.close();
+			String url = "http://119.29.108.164:90/image/"+fileName;
+			return ApiResult.success(url);
 		} catch (Exception e) {
 		}
 		return ApiResult.success();
