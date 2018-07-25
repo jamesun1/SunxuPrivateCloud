@@ -42,6 +42,7 @@ public class UploadServiceImp implements UploadMapper {
 				MultipartFile file2 = itrs.get(fileNameKey);
 				fileName = file2.getOriginalFilename(); // 原文件名
 			}
+			
 			MultipartFile file = ((MultipartHttpServletRequest) request).getFile(fileNameKey);
 			InputStream stream = file.getInputStream();
 			File ff = new File("/www/images/"+fileName);
