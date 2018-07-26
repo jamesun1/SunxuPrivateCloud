@@ -37,7 +37,7 @@ public class UploadServiceImp implements UploadMapper {
 			}
 			Iterator<String> itr = ((MultipartHttpServletRequest) request).getFileNames();
 			Map<String, MultipartFile> itrs = ((MultipartHttpServletRequest) request).getFileMap();
-			String fileName = UUID.randomUUID().toString();
+			String fileName = UUID.randomUUID().toString()+".jpg";
 			String fileNameKey = "";
 			while (itr.hasNext()) {
 				fileNameKey = itr.next(); // 原来的文件名的key
