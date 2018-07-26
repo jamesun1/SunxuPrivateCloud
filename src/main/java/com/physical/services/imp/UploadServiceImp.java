@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,20 +36,18 @@ public class UploadServiceImp implements UploadMapper {
 			}
 			Iterator<String> itr = ((MultipartHttpServletRequest) request).getFileNames();
 			Map<String, MultipartFile> itrs = ((MultipartHttpServletRequest) request).getFileMap();
-			String fileName = "";
+			String fileName = UUID.randomUUID().toString();
 			String fileNameKey = "";
 			while (itr.hasNext()) {
 				fileNameKey = itr.next(); // 原来的文件名的key
-				MultipartFile file2 = itrs.get(fileNameKey);
-				fileName = file2.getOriginalFilename(); // 原文件名
 			}
-			
+
 			MultipartFile file = ((MultipartHttpServletRequest) request).getFile(fileNameKey);
 			InputStream stream = file.getInputStream();
-			File ff = new File("/www/images/"+fileName);
+			File ff = new File("/www/images/" + fileName);
 			Thumbnails.of(stream).scale(1f).outputQuality(0.5f).toFile(ff);
-			
-			String url = "http://119.29.108.164:90/image/"+fileName;
+
+			String url = "http://119.29.108.164:90/image/" + fileName;
 			return ApiResult.success(url);
 		} catch (Exception e) {
 		}
