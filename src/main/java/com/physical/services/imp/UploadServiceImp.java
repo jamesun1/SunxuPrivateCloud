@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.mysql.jdbc.StringUtils;
 import com.physical.services.UploadMapper;
 import com.physical.util.ApiResult;
 
@@ -29,7 +30,7 @@ import net.coobird.thumbnailator.Thumbnails;
 public class UploadServiceImp implements UploadMapper {
 
 	@Override
-	public ApiResult upload(HttpServletRequest request, HttpServletResponse response) {
+	public ApiResult upload(HttpServletRequest request, HttpServletResponse response, String paramTip) {
 		try {
 			if (request.getCharacterEncoding() == null) {
 				request.setCharacterEncoding("UTF-8");// 你的编码格式
@@ -45,6 +46,12 @@ public class UploadServiceImp implements UploadMapper {
 			MultipartFile file = ((MultipartHttpServletRequest) request).getFile(fileNameKey);
 			InputStream stream = file.getInputStream();
 			File ff = new File("/www/images/" + fileName);
+			float f ;
+			if(StringUtils.isNullOrEmpty(paramTip)) {
+				f = 10.00f;
+			}else {
+				f = Integer.valueOf(paramTip)/100f;
+			}
 			Thumbnails.of(stream).scale(1f).outputQuality(0.5f).toFile(ff);
 
 			String url = "http://119.29.108.164:90/image/" + fileName;

@@ -7,6 +7,6 @@ import com.physical.util.ApiResult;
 
 public interface UploadMapper {
 
-	ApiResult upload(HttpServletRequest request, HttpServletResponse response);
+	ApiResult upload(HttpServletRequest request, HttpServletResponse response, String paramTip);
 
 }

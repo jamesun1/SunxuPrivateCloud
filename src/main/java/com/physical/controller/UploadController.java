@@ -19,7 +19,8 @@ public class UploadController {
 	private UploadMapper uploadMapper;
 	
 	@RequestMapping(value = "upload", method = { RequestMethod.POST })
-	public ApiResult upload(HttpServletRequest request,HttpServletResponse response) {
-		return uploadMapper.upload(request,response);
+	public ApiResult upload(HttpServletRequest request,HttpServletResponse response,String paramTip) {
+		
+		return uploadMapper.upload(request,response,paramTip);
 	}
 }
