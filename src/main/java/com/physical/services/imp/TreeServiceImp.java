@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.physical.mapper.TreeinfoMapper;
+import com.physical.mapper.UseraccountinfoMapper;
 import com.physical.model.Treeinfo;
+import com.physical.model.Useraccountinfo;
 import com.physical.services.TreeService;
 import com.physical.util.ApiResult;
 import com.physical.util.LogicalException;
@@ -20,6 +22,8 @@ public class TreeServiceImp implements TreeService{
 
 	@Autowired
 	private TreeinfoMapper treeinfoMapper;
+	@Autowired
+	private UseraccountinfoMapper useraccountinfoMapper;
 	
 	@Override
 	public ApiResult selectTreeInfo() throws LogicalException {
@@ -61,6 +65,29 @@ public class TreeServiceImp implements TreeService{
 			tree.setStatus("1");
 			treeinfoMapper.updateByPrimaryKeySelective(tree);
 			return ApiResult.success();	
+		}catch (Exception e) {
+			throw new LogicalException("操作失败");
+		}
+	}
+
+	@Override
+	public ApiResult selectUserByTreeid(String treeid) throws LogicalException {
+		try {
+			Useraccountinfo useraccountinfo = new Useraccountinfo();
+			useraccountinfo.setTreeid(treeid);
+			List<Useraccountinfo> userList = useraccountinfoMapper.select(useraccountinfo);
+			return ApiResult.success(userList);
+		}catch (Exception e) {
+			throw new LogicalException("操作失败");
+		}
+	}
+
+	@Override
+	public ApiResult insertUserByTreeid(Useraccountinfo useraccountinfo) throws LogicalException {
+		try {
+			useraccountinfo.setUseraccountinfoid(UUID.randomUUID().toString());
+			useraccountinfoMapper.insert(useraccountinfo);
+			return ApiResult.success();
 		}catch (Exception e) {
 			throw new LogicalException("操作失败");
 		}

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.physical.model.Treeinfo;
+import com.physical.model.Useraccountinfo;
 import com.physical.services.TreeService;
 import com.physical.util.ApiResult;
 import com.physical.util.LogicalException;
@@ -55,6 +56,28 @@ public class TreeController {
 	public ApiResult deleteTreeInfo(@RequestBody Treeinfo tree) {
 		try {
 			return treeService.deleteTreeInfo(tree);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
+	
+	@RequestMapping(value = "selectUserByTreeid", method = { RequestMethod.POST })
+	public ApiResult selectUserByTreeid(String treeid) {
+		try {
+			return treeService.selectUserByTreeid(treeid);
+		}catch (LogicalException e) {
+			return ApiResult.fail(e.getMessage());
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败！");
+		}
+	}
+	
+	@RequestMapping(value = "insertUserByTreeid", method = { RequestMethod.POST })
+	public ApiResult insertUserByTreeid(@RequestBody Useraccountinfo useraccountinfo) {
+		try {
+			return treeService.insertUserByTreeid(useraccountinfo);
 		}catch (LogicalException e) {
 			return ApiResult.fail(e.getMessage());
 		} catch (Exception e) {
