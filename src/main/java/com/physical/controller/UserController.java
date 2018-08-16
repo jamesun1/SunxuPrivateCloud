@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mysql.jdbc.StringUtils;
+import com.physical.Sender;
 import com.physical.model.Userinfo;
 import com.physical.services.UserService;
 import com.physical.util.ApiResult;
@@ -22,6 +23,14 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private RedisTokenService redisTokenService;
+	
+	@Autowired
+    private Sender sender;
+	
+	@RequestMapping("test")
+	public void test() {
+		sender.send();
+	}
 	
 	@RequestMapping("login")
 	public ApiResult login(@RequestBody Userinfo user) {
