@@ -58,7 +58,7 @@ public class UploadServiceImp implements UploadMapper {
 			}
 			Thumbnails.of(stream).scale(1f).outputQuality(0.5f).toFile(ff);
 
-			String url = "http://119.29.108.164:90/image/" + fileName;
+			String url = "http://119.29.108.164:90/image/" + fileName+".jpg";
 			return ApiResult.success(url);
 		} catch (Exception e) {
 		}
