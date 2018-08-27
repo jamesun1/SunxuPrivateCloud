@@ -30,7 +30,7 @@
 		treeinfo tree
 		WHERE
 		1 = 1
-		AND parentid =#{parentid}
 		AND STATUS = '0'
+		AND parentid =#{parentid}
 	</select>
 </mapper>
