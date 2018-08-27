@@ -58,7 +58,7 @@ public class UploadServiceImp implements UploadMapper {
 			}
 			Thumbnails.of(stream).scale(1f).outputQuality(0.5f).toFile(ff);
 
-			String url = "http://119.29.108.164:90/image/" + fileName+".jpg";
+			String url = "http://119.29.108.164:90/image/" + fileName;
 			return ApiResult.success(url);
 		} catch (Exception e) {
 		}
@@ -70,7 +70,7 @@ public class UploadServiceImp implements UploadMapper {
         try {
         	ImageCode imagecode=new ImageCode();
             BufferedImage img=imagecode.getImage();
-            String name = UUID.randomUUID().toString();
+            String name = UUID.randomUUID().toString()+".jpg";;
 			imagecode.saveImage(img, new FileOutputStream("/home/images"+name));
 			String url = "http://119.29.108.164:90/image/" + name;
 			return ApiResult.success(url);
