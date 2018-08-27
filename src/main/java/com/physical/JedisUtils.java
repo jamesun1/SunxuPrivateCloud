@@ -113,6 +113,6 @@ public class JedisUtils {
 		JSONObject json = (JSONObject) JSONObject.toJSON(aa);
 		System.out.println(json.toJSONString());
 		
-		remove("sunxu".getBytes());
+//		remove("sunxu".getBytes());
 	}
 }

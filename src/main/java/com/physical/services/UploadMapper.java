@@ -9,4 +9,6 @@ public interface UploadMapper {
 
 	ApiResult upload(HttpServletRequest request, HttpServletResponse response, String paramTip);
 
+	ApiResult createImage();
+
 }

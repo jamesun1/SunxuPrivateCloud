@@ -23,4 +23,10 @@ public class UploadController {
 		
 		return uploadMapper.upload(request,response,paramTip);
 	}
+	
+	@RequestMapping(value = "createImage", method = { RequestMethod.POST })
+	public ApiResult createImage() {
+		
+		return uploadMapper.createImage();
+	}
 }
