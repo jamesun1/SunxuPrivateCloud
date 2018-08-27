@@ -72,7 +72,7 @@ public class UploadServiceImp implements UploadMapper {
             BufferedImage img=imagecode.getImage();
             String name = UUID.randomUUID().toString()+".jpg";;
 			imagecode.saveImage(img, new FileOutputStream("/home/images/"+name));
-			String url = "http://119.29.108.164:90/image/" + name;
+			String url = "http://119.29.108.164:90/home/" + name;
 			return ApiResult.success(url);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
