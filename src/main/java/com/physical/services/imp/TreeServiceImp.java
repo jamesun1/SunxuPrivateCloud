@@ -8,13 +8,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysql.jdbc.StringUtils;
+import com.physical.mapper.PermissionMapper;
 import com.physical.mapper.TreeinfoMapper;
 import com.physical.mapper.UseraccountinfoMapper;
+import com.physical.model.Permission;
 import com.physical.model.Treeinfo;
 import com.physical.model.Useraccountinfo;
 import com.physical.services.TreeService;
 import com.physical.util.ApiResult;
 import com.physical.util.LogicalException;
+import com.physical.vo.PermissionVo;
+
+import tk.mybatis.mapper.util.StringUtil;
 
 @Service
 public class TreeServiceImp implements TreeService{
@@ -24,6 +30,8 @@ public class TreeServiceImp implements TreeService{
 	private TreeinfoMapper treeinfoMapper;
 	@Autowired
 	private UseraccountinfoMapper useraccountinfoMapper;
+	@Autowired
+	private PermissionMapper permissionMapper;
 	
 	@Override
 	public ApiResult selectTreeInfo() throws LogicalException {
@@ -87,6 +95,41 @@ public class TreeServiceImp implements TreeService{
 		try {
 			useraccountinfo.setUseraccountinfoid(UUID.randomUUID().toString());
 			useraccountinfoMapper.insert(useraccountinfo);
+			return ApiResult.success();
+		}catch (Exception e) {
+			throw new LogicalException("操作失败");
+		}
+	}
+
+	@Override
+	public ApiResult insertPermission(PermissionVo permission) throws LogicalException {
+		try {
+			permissionMapper.deleteAll();
+			for(Treeinfo item : permission.getTreeList()) {
+				String treeid = item.getTreeid();
+				Treeinfo tree = new Treeinfo();
+				tree = treeinfoMapper.selectByPrimaryKey(treeid);
+				if(!StringUtils.isNullOrEmpty(tree.getParentid())) {
+					Permission per = new Permission();
+					per.setTreeid(tree.getParentid());
+					int count = permissionMapper.selectCount(per);
+					if(count==0) {
+						per.setRoleid("角色1");
+						permissionMapper.insert(per);
+					}
+					per.setRoleid("角色1");
+					per.setTreeid(treeid);
+					permissionMapper.insert(per);
+				}else {
+					Permission per = new Permission();
+					per.setTreeid(treeid);
+					int count = permissionMapper.selectCount(per);
+					if(count==0) {
+						per.setRoleid("角色1");
+						permissionMapper.insert(per);
+					}
+				}
+			}
 			return ApiResult.success();
 		}catch (Exception e) {
 			throw new LogicalException("操作失败");
