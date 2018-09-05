@@ -17,16 +17,26 @@ public class UploadController {
 
 	@Autowired
 	private UploadMapper uploadMapper;
-	
+
 	@RequestMapping(value = "upload", method = { RequestMethod.POST })
-	public ApiResult upload(HttpServletRequest request,HttpServletResponse response,String paramTip) {
-		
-		return uploadMapper.upload(request,response,paramTip);
+	public ApiResult upload(HttpServletRequest request, HttpServletResponse response, String paramTip) {
+
+		return uploadMapper.upload(request, response, paramTip);
 	}
-	
+
 	@RequestMapping(value = "createImage", method = { RequestMethod.POST })
 	public ApiResult createImage() {
-		
+
 		return uploadMapper.createImage();
+	}
+
+	@RequestMapping(value = "downloadTest", method = { RequestMethod.POST })
+	public ApiResult downloadTest(HttpServletResponse response) {
+		try {
+			return uploadMapper.downloadTest(response);
+		} catch (Exception e) {
+			return ApiResult.fail("操作失败");
+		}
+
 	}
 }
